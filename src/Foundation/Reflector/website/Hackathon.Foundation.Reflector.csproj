@@ -65,7 +65,7 @@
     <PackageReference Include="Sitecore.Kernel" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="**\*.cs" Exclude="$(BaseIntermediateOutputPath)**\*.*;bin\**\*.*;" />
+    <Compile Include="ContentReflector.cs" />
     <Content Include="App_Config\Include\Foundation\Foundation.Reflector.config" />
     <None Include="Properties\PublishProfiles\Default.pubxml" />
     <None Include="README.md" />
