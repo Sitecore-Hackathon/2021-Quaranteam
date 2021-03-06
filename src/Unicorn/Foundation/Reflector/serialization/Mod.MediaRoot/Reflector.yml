@@ -1,0 +1,14 @@
+﻿---
+ID: "6abf9d0a-5a68-4055-b721-53182e78e900"
+Parent: "aa12eeae-d925-4569-bc39-6092c745fc05"
+Template: "fe5dd826-48c6-436d-b87a-7c4210c7413b"
+Path: /sitecore/media library/Feature/Reflector
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20210306T152946Z

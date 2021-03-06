@@ -1,0 +1,26 @@
+﻿---
+ID: "25c1d440-7c68-47a2-9258-f7b4c30eac9b"
+Parent: "c7c9ccf8-6056-475a-9931-23a23c300bfa"
+Template: "1773ecce-3f78-4201-8095-cae3574e8ede"
+Path: /sitecore/system/Settings/Foundation/Reflector/Reflector Site Setup/Edit Site Item
+DB: master
+SharedFields:
+- ID: "58aca5ca-742a-41bb-866f-cfa3764200c8"
+  Hint: Arguments
+  Type: Treelist
+  Value: "{CC3FC122-A595-4DD4-BBF3-277648A7EC0E}"
+- ID: "76691b61-8692-4d98-a4ff-115ba4208ab6"
+  Hint: EditType
+  Value: AddInsertOptions
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20210306T144554Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

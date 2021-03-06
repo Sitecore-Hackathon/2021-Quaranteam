@@ -1,0 +1,18 @@
+﻿---
+ID: "9a40c48e-8369-4d19-9738-035f267654bd"
+Parent: "c7c9ccf8-6056-475a-9931-23a23c300bfa"
+Template: "f83e50fa-251d-4051-b61e-6e2e44bfbe4d"
+Path: /sitecore/system/Settings/Foundation/Reflector/Reflector Site Setup/Attach Theme Extension
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20210306T144805Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
