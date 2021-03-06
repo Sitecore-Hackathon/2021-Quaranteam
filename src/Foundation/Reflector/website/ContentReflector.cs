@@ -20,16 +20,60 @@ namespace Hackathon.Foundation.Reflector
         public static string TEMPLATE_SECTION_ID = "{E269FBB5-3750-427A-9149-7AA950B49301}";
         public static string TEMPLATE_FIELD_ID = "{455A3E98-A627-4B40-8035-E683A0331AC7}";
 
-
-        public static bool BuildSitecoreTemplate()
+        /// <summary>
+        /// Create our template
+        /// </summary>
+        /// <param name="templateName"></param>
+        /// <param name="parentItemId"></param>
+        /// <param name="baseTemplates"></param>
+        /// <param name="templateFields"></param>
+        /// <returns></returns>
+        public static bool BuildSitecoreTemplate(string templateName, string parentTemplateFolderId, IEnumerable<Item> baseTemplates, IDictionary<string,Item> templateFields)
         {
             var success = false;
 
             try
             {
+                using (new SecurityDisabler())
+                {
+                    //First get the template folder item from the master database
+                    Database masterDb = Sitecore.Configuration.Factory.GetDatabase("master");
+                    Item templateFolder = masterDb.GetItem(new ID(parentTemplateFolderId));
 
+                    // Get the standard template items
+                    TemplateItem standardTemplate = masterDb.GetItem(TEMPLATE_ID);
+                    TemplateItem templateSection = masterDb.GetItem(TEMPLATE_SECTION_ID);
+                    TemplateItem templateField = masterDb.GetItem(TEMPLATE_FIELD_ID);
 
-                success = true;
+                    // Insert our template
+                    Item newTemplate = templateFolder.Add(templateName, standardTemplate);
+
+                    // Adding field to template
+                    newTemplate.Editing.BeginEdit();
+
+                    // Add our base templates
+                    StringBuilder baseTemplatesStringBuilder = new StringBuilder();
+                    baseTemplatesStringBuilder.Append(standardTemplate.ID.ToString());
+                    foreach(var baseTemplate in baseTemplates)
+                    {
+                        baseTemplatesStringBuilder.Append("|" + baseTemplate.ID.ToString());
+                    }
+                    newTemplate.Fields["Base template"].Value = baseTemplatesStringBuilder.ToString();
+
+                    // Add our section
+                    Item newSection = newTemplate.Add("Data", templateSection);
+
+                    // Add our template fields
+                    foreach(var field in templateFields)
+                    {
+                        Item fieldItem = newSection.Add(field.Key, templateField);
+                        fieldItem.Fields["Type"].Value = field.Value.Name;
+                    }
+
+                    newTemplate.Editing.EndEdit();
+
+                    success = true;
+                }
             }
             catch (Exception ex)
             {
