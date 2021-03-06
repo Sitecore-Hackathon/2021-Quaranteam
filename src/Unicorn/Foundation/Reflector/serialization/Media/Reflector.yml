@@ -1,0 +1,14 @@
+﻿---
+ID: "9196c0a6-24cd-4bc5-ba32-bff9910e1ef1"
+Parent: "574ebb19-4a94-44fe-aa79-877dd48c7da1"
+Template: "fe5dd826-48c6-436d-b87a-7c4210c7413b"
+Path: /sitecore/media library/Foundation/Reflector
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20210306T132726Z

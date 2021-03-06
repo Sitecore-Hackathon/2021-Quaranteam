@@ -1,0 +1,18 @@
+﻿---
+ID: "3d4816d9-af9c-4852-b68b-274befe12f7c"
+Parent: "f9f17bd1-4392-4dff-b253-c7a51fea8b20"
+Template: "5c76ad53-96cd-4b96-9690-dd9af2650171"
+Path: /sitecore/content/Hackathon/Sample/Settings/Item Queries
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20210306T133349Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

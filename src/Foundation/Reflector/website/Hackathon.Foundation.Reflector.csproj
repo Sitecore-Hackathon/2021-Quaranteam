@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="ContentReflector.cs" />
     <Content Include="App_Config\Include\Foundation\Foundation.Reflector.config" />
+    <Content Include="App_Config\Include\Foundation\Foundation.Reflector.Serialization.config" />
     <None Include="Properties\PublishProfiles\Default.pubxml" />
     <None Include="README.md" />
     <None Include="web.config" />
