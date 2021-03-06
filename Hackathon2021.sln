@@ -29,9 +29,57 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Docker", "_Docker", "{7A26
 		docker\docker-compose.yml = docker\docker-compose.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reflector", "Reflector", "{5D1016C5-91C1-430D-B869-0168E47028F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serialization", "Serialization", "{9BF2C616-97F6-4BEC-8FC3-54DA1C03AA2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackathon.Foundation.Serialization", "src\Foundation\Serialization\website\Hackathon.Foundation.Serialization.csproj", "{13119FDB-64D4-408F-9512-93262ADA0DD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackathon.Foundation.Reflector", "src\Foundation\Reflector\website\Hackathon.Foundation.Reflector.csproj", "{84D6DE4E-3DFD-4017-B879-38B681660982}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{13FDEDAC-EEF2-4340-9512-FBC05F1E9A3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DependencyInjection", "DependencyInjection", "{76EDA9BA-760E-4197-8A3E-AFC7EF4B34AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackathon.Foundation.DependencyInjection", "src\Foundation\DependencyInjection\website\Hackathon.Foundation.DependencyInjection.csproj", "{70BA1B4A-5F66-45C6-861C-37965E3F0191}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DevOps|Any CPU = DevOps|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13119FDB-64D4-408F-9512-93262ADA0DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13119FDB-64D4-408F-9512-93262ADA0DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13119FDB-64D4-408F-9512-93262ADA0DD8}.DevOps|Any CPU.ActiveCfg = DevOps|Any CPU
+		{13119FDB-64D4-408F-9512-93262ADA0DD8}.DevOps|Any CPU.Build.0 = DevOps|Any CPU
+		{13119FDB-64D4-408F-9512-93262ADA0DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13119FDB-64D4-408F-9512-93262ADA0DD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84D6DE4E-3DFD-4017-B879-38B681660982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D6DE4E-3DFD-4017-B879-38B681660982}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84D6DE4E-3DFD-4017-B879-38B681660982}.DevOps|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D6DE4E-3DFD-4017-B879-38B681660982}.DevOps|Any CPU.Build.0 = Debug|Any CPU
+		{84D6DE4E-3DFD-4017-B879-38B681660982}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84D6DE4E-3DFD-4017-B879-38B681660982}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70BA1B4A-5F66-45C6-861C-37965E3F0191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70BA1B4A-5F66-45C6-861C-37965E3F0191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70BA1B4A-5F66-45C6-861C-37965E3F0191}.DevOps|Any CPU.ActiveCfg = Debug|Any CPU
+		{70BA1B4A-5F66-45C6-861C-37965E3F0191}.DevOps|Any CPU.Build.0 = Debug|Any CPU
+		{70BA1B4A-5F66-45C6-861C-37965E3F0191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70BA1B4A-5F66-45C6-861C-37965E3F0191}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5D1016C5-91C1-430D-B869-0168E47028F6} = {4FDA1DCD-D33E-447E-91C1-F4AE818E2CF0}
+		{9BF2C616-97F6-4BEC-8FC3-54DA1C03AA2F} = {4FDA1DCD-D33E-447E-91C1-F4AE818E2CF0}
+		{13119FDB-64D4-408F-9512-93262ADA0DD8} = {9BF2C616-97F6-4BEC-8FC3-54DA1C03AA2F}
+		{84D6DE4E-3DFD-4017-B879-38B681660982} = {5D1016C5-91C1-430D-B869-0168E47028F6}
+		{13FDEDAC-EEF2-4340-9512-FBC05F1E9A3A} = {4FDA1DCD-D33E-447E-91C1-F4AE818E2CF0}
+		{76EDA9BA-760E-4197-8A3E-AFC7EF4B34AC} = {4FDA1DCD-D33E-447E-91C1-F4AE818E2CF0}
+		{70BA1B4A-5F66-45C6-861C-37965E3F0191} = {76EDA9BA-760E-4197-8A3E-AFC7EF4B34AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {311DA37D-528B-43B2-A99B-E7253F841D46}

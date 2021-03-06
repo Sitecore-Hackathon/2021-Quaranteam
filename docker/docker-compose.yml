@@ -21,11 +21,11 @@ services:
         target: \\.\pipe\docker_engine
         type: npipe
       - ./traefik:C:/etc/traefik
-    depends_on:
-      id:
-        condition: service_healthy
-      cm:
-        condition: service_healthy
+    #depends_on:
+     # id:
+     #   condition: service_healthy
+      #cm:
+      #  condition: service_healthy
 
   mssql:
     isolation: ${ISOLATION}

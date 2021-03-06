@@ -6,7 +6,7 @@
 -->
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PlatformVersion>10.1.0</PlatformVersion>
+    <PlatformVersion>[10.1.0]</PlatformVersion>
     <SitecoreAspNetVersion>16.0.0</SitecoreAspNetVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -26,5 +26,27 @@
     <PackageReference Update="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.1" />
     <PackageReference Update="Microsoft.Extensions.Http" Version="3.1.1" />
     <PackageReference Update="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+
+    <PackageReference Update="Unicorn" Version="[4.1.1]" />
+    <PackageReference Update="Unicorn.Core" Version="[4.1.1]" />
+    <PackageReference Update="Unicorn.Roles" Version="[4.1.1]" />
+    <PackageReference Update="Unicorn.Roles.Core" Version="[4.1.1]" />
+    <PackageReference Update="Unicorn.Users" Version="[4.1.1]" />
+    <PackageReference Update="Unicorn.Users.Core" Version="[4.1.1]" />
+
+
+      <PackageReference Update="Microsoft.AspNet.Mvc" Version="[5.2.4]" />
+      <PackageReference Update="Microsoft.AspNet.Razor" Version="[3.2.7]" />
+      <PackageReference Update="Microsoft.AspNet.WebPages" Version="[3.2.7]" />
+      <PackageReference Update="Microsoft.Web.Infrastructure" Version="[1.0.0]" />
+      
+      <PackageReference Update="Sitecore.Mvc" Version="$(PlatformVersion)" />
+      <PackageReference Update="Sitecore.XA.Foundation.Mvc" Version="$(PlatformVersion)" />
+      <PackageReference Update="Sitecore.XA.Foundation.Presentation" Version="$(PlatformVersion)" />
+      <PackageReference Update="Sitecore.XA.Foundation.RenderingVariants" Version="$(PlatformVersion)" />
+      <PackageReference Update="Sitecore.XA.Foundation.Variants.Abstractions" Version="$(PlatformVersion)" />
+      <PackageReference Update="Sitecore.XA.Foundation.Scriban" Version="$(PlatformVersion)" />
+      
+      
   </ItemGroup>
 </Project>
