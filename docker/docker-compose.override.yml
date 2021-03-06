@@ -26,8 +26,8 @@ services:
   traefik:
     volumes:
       - ./traefik:C:/etc/traefik
-    depends_on:
-      - cm
+    # depends_on:
+    # - cm
   
   mssql:
     image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-xp0-mssql:${VERSION:-latest}
@@ -40,14 +40,14 @@ services:
     volumes:
       - ${LOCAL_DATA_PATH}\mssql:c:\data
     mem_limit: ${MEM_LIMIT_SQL:-2GB}
-    restart: always
+    restart: unless-stopped
 
   # Mount our Solr data folder and use our retagged Solr image.
   solr:
     volumes:
       - ${LOCAL_DATA_PATH}\solr:c:\data
     mem_limit: ${MEM_LIMIT_SOLR:-1GB}
-    restart: always
+    restart: unless-stopped
 
   # Some modules (like SXA) also require additions to the Solr image.
   solr-init:
@@ -90,7 +90,7 @@ services:
       SITECORE_LICENSE_LOCATION: c:\license\license.xml
     entrypoint: powershell -Command "& C:\tools\entrypoints\iis\Development.ps1"
     mem_limit: ${MEM_LIMIT_CM:-4GB}
-    restart: always
+    restart: unless-stopped
     labels:
       - "traefik.http.middlewares.redirect-to-https.redirectScheme.scheme=https"
       - "traefik.http.routers.cm.entrypoints=web"
