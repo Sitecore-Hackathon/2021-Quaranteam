@@ -79,14 +79,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IoC\MvcControllerServicesConfigurator.cs" />
-    <Compile Include="IoC\MvcControllerServicesConfigurator.cs" />
-    <Compile Include="Lifetime.cs" />
     <Compile Include="Lifetime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceAttribute.cs" />
-    <Compile Include="ServiceAttribute.cs" />
-    <Compile Include="ServiceCollectionExtensions.cs" />
     <Compile Include="ServiceCollectionExtensions.cs" />
     <None Include="Properties\PublishProfiles\Default.pubxml" />
     <None Include="Web.config">
@@ -133,6 +128,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
