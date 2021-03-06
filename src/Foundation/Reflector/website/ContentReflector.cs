@@ -61,7 +61,7 @@ namespace Hackathon.Foundation.Reflector
         /// <param name="baseTemplates"></param>
         /// <param name="templateFields"></param>
         /// <returns></returns>
-        public static bool BuildSitecoreTemplate(string templateName, string parentTemplateFolderId, IEnumerable<Item> baseTemplates, IDictionary<string,Item> templateFields)
+        public static bool BuildSitecoreTemplate(string templateName, string parentTemplateFolderId, IEnumerable<Item> baseTemplates, IDictionary<string,string> templateFields)
         {
             var success = false;
 
@@ -87,11 +87,14 @@ namespace Hackathon.Foundation.Reflector
                     // Add our base templates
                     StringBuilder baseTemplatesStringBuilder = new StringBuilder();
                     baseTemplatesStringBuilder.Append(standardTemplate.ID.ToString());
-                    foreach(var baseTemplate in baseTemplates)
+                    if (baseTemplates != null)
                     {
-                        baseTemplatesStringBuilder.Append("|" + baseTemplate.ID.ToString());
+                        foreach (var baseTemplate in baseTemplates)
+                        {
+                            baseTemplatesStringBuilder.Append("|" + baseTemplate.ID.ToString());
+                        }
                     }
-                    newTemplate.Fields["Base template"].Value = baseTemplatesStringBuilder.ToString();
+                    newTemplate["__Base template"] = baseTemplatesStringBuilder.ToString();
 
                     // Add our section
                     Item newSection = newTemplate.Add("Data", templateSection);
@@ -100,7 +103,7 @@ namespace Hackathon.Foundation.Reflector
                     foreach(var field in templateFields)
                     {
                         Item fieldItem = newSection.Add(field.Key, templateField);
-                        fieldItem.Fields["Type"].Value = field.Value.Name;
+                        fieldItem.Fields["Type"].Value = field.Value;
                     }
 
                     newTemplate.Editing.EndEdit();
