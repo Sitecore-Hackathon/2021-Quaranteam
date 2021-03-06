@@ -8,7 +8,8 @@ SharedFields:
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
-            $newFeatureName = "bio"
+            Import-Function Add-Module
+            $newFeatureName = "bio1"
             $templates = Get-Item -Path "master:" -ID "{8F343079-3CC5-4EF7-BC27-32ADDB46F45E}"
     		$branches = Get-Item -Path "master:" -ID "{AD71FACC-3C23-4DF8-A427-672020DB5612}"
     		$settings = Get-Item -Path "master:" -ID "{256655EC-8F3A-45B5-AD90-B63BC25B8067}"
@@ -20,6 +21,26 @@ SharedFields:
             $model.Name                  = $newFeatureName
             $model.SetupItemTemplatesIds = "{141DF88E-7156-4D2E-A004-C8C1A7C51E9D}","{292CCFCD-7790-4692-856B-76014B8038E7}"
             $model
+            
+            Add-Module $model
+            
+            [System.Reflection.Assembly]::LoadWithPartialName("Hackathon.Foundation.Reflector")
+            
+            # BuildSitecoreTemplate(string templateName, string parentTemplateFolderId, IEnumerable<Item> baseTemplates, IDictionary<string,Item> templateFields)
+            $templateFolder = Get-Item -Path ("master:" + $templates.Paths.Path + $model.Tail + "/" + $newFeatureName)
+            $fields = New-Object 'System.Collections.Generic.Dictionary[String,String]'
+            $fields.Add("Blog Title", "Single-Line Text")
+            $fields.Add("Blog Content", "Single-Line Text")
+    
+            [Hackathon.Foundation.Reflector.ContentReflector]::BuildSitecoreTemplate($newFeatureName, $templateFolder.ID, $null, $fields)
+            
+            # BuildRenderings(string renderingFolderId)
+            $renderingFolder = Get-Item -Path ("master:" + $renderings.Paths.Path + $model.Tail + "/" + $newFeatureName)
+            [Hackathon.Foundation.Reflector.ContentReflector]::BuildRenderings($renderingFolder.ID)
+            
+            # BuildScribanRendering(string renderingName, string parentItemId, string templateId)
+            # [Hackathon.Foundation.Reflector.ContentReflector]::BuildScribanRendering($renderingName, $parentItemId, $baseTemplates, $templateId)
+    
 Languages:
 - Language: en
   Versions:
