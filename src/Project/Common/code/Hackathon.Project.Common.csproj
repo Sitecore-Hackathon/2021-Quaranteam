@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="$(BaseIntermediateOutputPath)**\*.*;bin\**\*.*;" />
     <Content Include="App_Config\Include\Project\Hackathon.Project.Common.config" />
+    <Content Include="App_Config\Include\Project\Hackathon.Project.Common.Serialization.config" />
     <None Include="Properties\PublishProfiles\Default.pubxml" />
     <None Include="README.md" />
     <Content Include="web.config" />

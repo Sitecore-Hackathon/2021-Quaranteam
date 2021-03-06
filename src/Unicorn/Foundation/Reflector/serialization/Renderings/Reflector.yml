@@ -1,0 +1,14 @@
+﻿---
+ID: "8b7de559-fc87-42e1-bc63-9b18ad8d5554"
+Parent: "180d4942-2b10-4375-bc06-e0d94220a68f"
+Template: "7ee0975b-0698-493e-b3a2-0b2ef33d0522"
+Path: /sitecore/layout/Renderings/Foundation/Reflector
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20210306T132726Z
