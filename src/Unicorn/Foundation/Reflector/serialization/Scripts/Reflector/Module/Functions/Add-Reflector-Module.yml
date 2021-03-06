@@ -8,6 +8,7 @@ SharedFields:
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
+            $newFeatureName = "bio"
             $templates = Get-Item -Path "master:" -ID "{8F343079-3CC5-4EF7-BC27-32ADDB46F45E}"
     		$branches = Get-Item -Path "master:" -ID "{AD71FACC-3C23-4DF8-A427-672020DB5612}"
     		$settings = Get-Item -Path "master:" -ID "{256655EC-8F3A-45B5-AD90-B63BC25B8067}"
