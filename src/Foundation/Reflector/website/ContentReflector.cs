@@ -19,6 +19,39 @@ namespace Hackathon.Foundation.Reflector
         public static string TEMPLATE_ID = "{AB86861A-6030-46C5-B394-E8F99E8B87DB}";
         public static string TEMPLATE_SECTION_ID = "{E269FBB5-3750-427A-9149-7AA950B49301}";
         public static string TEMPLATE_FIELD_ID = "{455A3E98-A627-4B40-8035-E683A0331AC7}";
+        public static string PAGE_CONTENT_RENDERING_ID = "{8B0393E9-EE25-4F0B-A5FD-777B3AD2C737}";
+        public static string PAGE_LIST_RENDERING_ID = "{2E991AA4-4B08-43D2-AD2B-17C11E69A499}";
+
+        public static bool BuildRenderings(string renderingFolderId)
+        {
+            var success = false;
+
+            try
+            {
+                using (new SecurityDisabler())
+                {
+                    //First get the template folder item from the master database
+                    Database masterDb = Sitecore.Configuration.Factory.GetDatabase("master");
+                    Item renderingFolder = masterDb.GetItem(new ID(renderingFolderId));
+
+                    // Copy page content to rendering folder
+                    Item pageContentRendering = masterDb.GetItem(new ID(PAGE_CONTENT_RENDERING_ID));
+                    pageContentRendering.CopyTo(renderingFolder, "Page Content");
+
+                    // Copy page list to rendering folder
+                    Item pageListRendering = masterDb.GetItem(new ID(PAGE_LIST_RENDERING_ID));
+                    pageListRendering.CopyTo(renderingFolder, "Page List");
+
+                    success = true;
+                }
+            }
+            catch(Exception ex)
+            {
+                Sitecore.Diagnostics.Log.Error("Exception creatign renderings.", ex);
+            }
+
+            return success;
+        }
 
         /// <summary>
         /// Create our template
