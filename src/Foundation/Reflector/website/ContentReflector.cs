@@ -1,13 +1,11 @@
-﻿using Sitecore.Data;
+﻿using System;
+using System.Text;
+using Hackathon.Foundation.Reflector.Models;
+using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Data.Managers;
 using Sitecore.Data.Templates;
 using Sitecore.SecurityModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
 
 namespace Hackathon.Foundation.Reflector
 {
@@ -61,7 +59,7 @@ namespace Hackathon.Foundation.Reflector
         /// <param name="baseTemplates"></param>
         /// <param name="templateFields"></param>
         /// <returns></returns>
-        public static bool BuildSitecoreTemplate(string templateName, string parentTemplateFolderId, IEnumerable<Item> baseTemplates, IDictionary<string,string> templateFields)
+        public static bool BuildSitecoreTemplate(NewModuleModel moduleModel, string parentTemplateFolderId)
         {
             var success = false;
 
@@ -79,7 +77,8 @@ namespace Hackathon.Foundation.Reflector
                     TemplateItem templateField = masterDb.GetItem(TEMPLATE_FIELD_ID);
 
                     // Insert our template
-                    Item newTemplate = templateFolder.Add(templateName, standardTemplate);
+                    Item newTemplate = templateFolder.Add(moduleModel.ContentTypeName, standardTemplate);
+                    TemplateItem templateItem = new TemplateItem(newTemplate);
 
                     // Adding field to template
                     newTemplate.Editing.BeginEdit();
@@ -87,23 +86,26 @@ namespace Hackathon.Foundation.Reflector
                     // Add our base templates
                     StringBuilder baseTemplatesStringBuilder = new StringBuilder();
                     baseTemplatesStringBuilder.Append(standardTemplate.ID.ToString());
-                    if (baseTemplates != null)
+                    if (moduleModel.BaseTemplates != null)
                     {
-                        foreach (var baseTemplate in baseTemplates)
+                        foreach (var baseTemplate in moduleModel.BaseTemplates)
                         {
                             baseTemplatesStringBuilder.Append("|" + baseTemplate.ID.ToString());
                         }
                     }
+
                     newTemplate["__Base template"] = baseTemplatesStringBuilder.ToString();
 
-                    // Add our section
-                    Item newSection = newTemplate.Add("Data", templateSection);
+                    templateItem.AddSection("Data");
 
                     // Add our template fields
-                    foreach(var field in templateFields)
+                    foreach (var field in moduleModel.FieldList)
                     {
-                        Item fieldItem = newSection.Add(field.Key, templateField);
-                        fieldItem.Fields["Type"].Value = field.Value;
+                        TemplateFieldItem fieldItem = templateItem.AddField(field.Key, "Data");
+
+                        fieldItem.BeginEdit();
+                        fieldItem.Type = field.Value.Name;
+                        fieldItem.EndEdit();
                     }
 
                     newTemplate.Editing.EndEdit();
@@ -113,7 +115,7 @@ namespace Hackathon.Foundation.Reflector
             }
             catch (Exception ex)
             {
-                Sitecore.Diagnostics.Log.Error("Exception creating Sitecore template.", ex);
+                Sitecore.Diagnostics.Log.Error("Exception creating Sitecore template.", ex, (object)"BuildSitecoreTemplate");
             }
             return success;
         }

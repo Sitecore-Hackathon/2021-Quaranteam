@@ -27,49 +27,61 @@ SharedFields:
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
+    [System.Reflection.Assembly]::LoadWithPartialName("Hackathon.Foundation.Reflector")
+    
+    Import-Function Add-Reflector-Module
+    
     $dialogParams = @{
-        Title = "SXA Reflector"
-        Description = "Fill out the fields to add a new component."
-        OkButtonName = "Continue"
-        CancelButtonName = "Close"
+    	Title = "SXA Reflector"
+    	Description = "Fill out the fields to add a new component."
+    	OkButtonName = "Continue"
+    	CancelButtonName = "Close"
     	Width = 600
-    	Height = 650
-        ShowHints = $true
-        Parameters = @(
-            @{
-                Name = "contentType"
-                Title = "Item Type"
-                Placeholder = "Name of the type of item"
-                Tooltip = "Enter the name of the type of item you are looking to create"
-    			Mandatory = $true
-            }
+    	Height = 750
+    	ShowHints = $true
+    	Parameters = @(
     		@{
-                Name = "baseTemplates"
-                Title = "Base Templates"
-                Editor = "treelist"
-                Source = "DataSource=/sitecore/templates&DatabaseName=master"
-                Tooltip = "Select one or more base templates from tree"
-            }
+    			Name = "contentTypeName"
+    			Title = "Item Type"
+    			Placeholder = "Name of the type of item"
+    			Tooltip = "Enter the name of the type of item you are looking to create"
+    			Mandatory = $true
+    		}
+    		@{
+    			Name = "pageTemplate"
+    			Title = "Page Template"
+    			Editor = "droptree"
+    			Source = "DataSource=/sitecore/templates/Project&DatabaseName=master"
+    			Tooltip = "Select a page template from tree"
+    			Mandatory = $true
+    		}
+    		@{
+    			Name = "baseTemplates"
+    			Title = "Base Templates"
+    			Editor = "treelist"
+    			Source = "DataSource=/sitecore/templates/Feature&DatabaseName=master"
+    			Tooltip = "Select one or more base templates from tree"
+    		}
     		@{
     			Name = "fieldCount"
     			Title = "Number of Fields"
     			Placeholder = "Number of fields you want to add"
     			Tooltip = "Enter the number of fields you want to add to your custom item"
     		}
-        )
-        Validator = {
-            $fieldCountText = $variables.fieldCount.Value
-            
-            if ($fieldCountText -notmatch '\d+') {
-                $variables.fieldCount.Error = "Please enter a number to proceed."
-            }
-        }
+    	)
+    	Validator = {
+    		$fieldCountText = $variables.fieldCount.Value
+    		
+    		if ($fieldCountText -notmatch '\d+') {
+    			$variables.fieldCount.Error = "Please enter a number to proceed."
+    		}
+    	}
     }
      
     $dialogResult = Read-Variable @dialogParams
     
     if ($dialogResult -ne "ok") {
-        Exit
+    	Exit
     }
     
     $fieldsCount = [int]$fieldCount
@@ -78,17 +90,17 @@ SharedFields:
     $pattern = ""
     
     for($i = 0; $i -lt $fieldsCount; $i++){
-        
-        $fieldFormName = "Field$i"
-        $fieldTypeName = "FieldType$i"
-        
-        if($i -eq $fieldsCount – 1){
-            $pattern += '@{ Name = "'+$fieldFormName+'"; Title = "Field Name"; Mandatory = $true; Tab = "Field '+$counter+'" },`
-    		@{ Name = "'+$fieldTypeName+'"; Title = "Field Type"; Editor = "droptree"; Source = "DataSource=/sitecore/system/Field types&DatabaseName=core"; Mandatory = $true; Tooltip = "Select from dropdown tree"; Tab = "Field '+$counter+'"  }'
-        }else{
-            $pattern += '@{ Name = "'+$fieldFormName+'"; Title = "Field Name"; Mandatory = $true; Tab = "Field '+$counter+'" },`
-    		@{ Name = "'+$fieldTypeName+'"; Title = "Field Type"; Editor = "droptree"; Source = "DataSource=/sitecore/system/Field types&DatabaseName=core"; Mandatory = $true; Tooltip = "Select from dropdown tree"; Tab = "Field '+$counter+'"  },'
-        }
+    	
+    	$fieldFormName = "Field$i"
+    	$fieldTypeName = "FieldType$i"
+    	
+    	if($i -eq $fieldsCount – 1){
+    		$pattern += '@{ Name = "'+$fieldFormName+'"; Title = "Field Name"; Mandatory = $true; Tab = "Field '+$counter+'" },`
+    		@{ Name = "'+$fieldTypeName+'"; Title = "Field Type"; Editor = "droptree"; Source = "DataSource=/sitecore/system/Field types&DatabaseName=core"; Mandatory = $true; Tooltip = "Select from dropdown tree"; Tab = "Field '+$counter+'" }'
+    	}else{
+    		$pattern += '@{ Name = "'+$fieldFormName+'"; Title = "Field Name"; Mandatory = $true; Tab = "Field '+$counter+'" },`
+    		@{ Name = "'+$fieldTypeName+'"; Title = "Field Type"; Editor = "droptree"; Source = "DataSource=/sitecore/system/Field types&DatabaseName=core"; Mandatory = $true; Tooltip = "Select from dropdown tree"; Tab = "Field '+$counter+'" },'
+    	}
     	$counter++
     }
     
@@ -97,19 +109,28 @@ SharedFields:
     $dialogResult = Read-Variable –Parameters $convert –Description "Add field names" –Title "Field Names" –Width 600 –Height 650 –OkButtonName "Create" –CancelButtonName "Cancel" –ShowHints
     
     if ($dialogResult -ne "ok") {
-        Exit
+    	Exit
     }
     
-    $fieldNames = [System.Collections.ArrayList]@()
+    $fieldNames = New-Object 'System.Collections.Generic.Dictionary[string,Sitecore.Data.Items.Item]'
     
     for($i = 0; $i -lt $fieldsCount; $i++){
-        
-        $fieldName = Invoke-Expression $"Field$i"
-        
-        $fieldItem = New-Item –Path "path to create the item" –Name $fieldName –ItemType "My Template Path goes here"
     	
-    	[void]$fieldNames.Add($fieldItem.Name)
+    	$fieldName = Invoke-Expression $"Field$i"
+    	$fieldTypeName = Invoke-Expression $"FieldType$i"
+    	
+    	$fieldNames.Add($fieldName,$fieldTypeName)
     }
+    
+    
+    $model = New-Object "Hackathon.Foundation.Reflector.Models.NewModuleModel"
+    $model.ContentTypeName = $contentTypeName
+    $model.PageTemplate = $pageTemplate
+    $model.BaseTemplates = $baseTemplates
+    $model.FieldList = $fieldNames
+    
+    Add-Reflector-Module $model
+    
 Languages:
 - Language: en
   Versions:
