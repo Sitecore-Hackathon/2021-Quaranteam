@@ -2,7 +2,7 @@
 ID: "ad4b8fc3-79c5-42fd-9490-077ba6e8e53c"
 Parent: "19918130-1997-4da4-b983-f1dfbd5d3de5"
 Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
-Path: /sitecore/system/Modules/PowerShell/Script Library/Reflector/Module/Content Editor/Context Menu/Add Component
+Path: /sitecore/system/Modules/PowerShell/Script Library/Reflector/Module/Content Editor/Context Menu/New Content Type
 DB: master
 SharedFields:
 - ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
